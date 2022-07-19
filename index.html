@@ -1,0 +1,65 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+
+  <h1>Diagrama de flujo</h1>
+
+  <div class="mermaid">
+    flowchart TD
+      01(Ingresar usuario y contraseña) --> 02{Son válidos?};
+      02 -- Si --> 03(Pregunta si se desea crear un paciente, un doctor, una cita o salir de la aplicación);
+      02 -- No --> 04[Muestra que los datos son incorrectos] --> 05[Cierra la aplicación];
+      03 -- paciente --> P1[Ingresar Nombre] --> P2[Generar ID] --> 03;
+      03 -- doctor --> D1[Ingresar Nombre] --> D2[Ingresar Especialidad] --> D3[Generar ID] --> 03;
+      03 -- cita --> C1[Ingresar Fecha] --> C2[Ingresar Hora] --> C3[Ingresar Motivo] --> C4[Ingresar ID Paciente] --> C5[Ingresar ID Doctor] --> C6[Generar ID] --> 03;
+      03 -- salir --> 05
+  </div>
+
+  <h1>Diagrama de clases</h1>
+
+  <div class="mermaid">
+    classDiagram
+      Evidencia <|-- Paciente
+      Evidencia <|-- Cita
+      Evidencia <|-- Doctor
+      Evidencia : +String userName
+      Evidencia : +String userPass
+      Evidencia: +askInput()
+      class Paciente {
+        +long id
+        +String nombre
+        +getInfo()
+      }
+      class Cita {
+        +long id
+        +String fecha
+        +String hora
+        +String motivo
+        +String idPaciente
+        +String idDoctor
+        +getInfo()
+      }
+      class Doctor {
+        +long id
+        +String nombre
+        +String especialidad
+        +getInfo()
+      }
+  </div>
+
+</body>
+
+</html>
